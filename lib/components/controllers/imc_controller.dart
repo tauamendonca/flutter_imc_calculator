@@ -25,12 +25,33 @@ class ImcController extends ChangeNotifier {
   void calculateImc() {
     try {
       final result = _peso / (_altura * _altura);
-      textStart = "Seu IMC é $result";
+      final imcPrint = classificateImc(result);
+      textStart = "Seu IMC é ${result.toStringAsFixed(0)} $imcPrint";
+
       notifyListeners();
     } catch (e) {
-      textStart = "Tem certeza que são esses seu peso e altura?";
+      textStart =
+          "Houve um erro no cálculo. Entre em contato com o desenvolvedor.";
       notifyListeners();
       //throw ("Ocorreu um erro: $e");
     }
   }
+}
+
+classificateImc(imc) {
+  String imcClass = "";
+
+  if (imc < 18.5) {
+    imcClass = "abaixo do peso";
+  } else if (imc >= 18.5 && imc <= 24.9) {
+    imcClass = "com peso normal";
+  } else if (imc >= 25 && imc <= 29.9) {
+    imcClass = "com obesidade de grau I";
+  } else if (imc >= 30 && imc <= 34.9) {
+    imcClass = "com obesidade de grau II";
+  } else {
+    imcClass = "com obesidade de grau III ou mórbida";
+  }
+
+  return "e você está $imcClass";
 }

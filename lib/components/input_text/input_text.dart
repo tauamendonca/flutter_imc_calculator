@@ -15,7 +15,7 @@ class InputText extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.inputFormatters, //pesquisar
-    this.keyboardType, //pesquisar
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -32,6 +32,7 @@ class InputText extends StatelessWidget {
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
           onChanged: onChanged,
+          scrollPadding: const EdgeInsets.only(bottom: 40),
           validator: (value) {
             if (validator != null) {
               return validator!(value ?? "");
